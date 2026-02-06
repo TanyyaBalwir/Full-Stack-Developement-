@@ -154,3 +154,35 @@ footer {
     padding: 15px;
     text-align: center;
 }
+/* Profile Picture */
+.profile-pic {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+/* Social Buttons */
+.social-links {
+    margin-top: 20px;
+}
+
+.btn {
+    text-decoration: none;
+    background: white;
+    color: #9d4edd;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #f3e8ff;
+    transform: scale(1.05);
+}
