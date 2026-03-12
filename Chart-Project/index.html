@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Analytics Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<h1>📊 Sales Analytics Dashboard</h1>
+
+<div class="dashboard">
+
+    <div class="chart-container">
+        <h2>Monthly Sales</h2>
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h2>Product Categories</h2>
+        <canvas id="categoryChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <h2>Weekly Revenue Trend</h2>
+        <canvas id="revenueChart"></canvas>
+    </div>
+
+</div>
+
+<button onclick="updateData()">🔄 Update Data</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
