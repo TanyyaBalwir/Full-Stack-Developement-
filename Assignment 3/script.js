@@ -1,10 +1,4 @@
-const products = [
-    { id: 1, name: "Jacket", price: 1999, image: "images/jacket.png" },
-    { id: 2, name: "T-Shirt", price: 799, image: "images/tshirt.png" },
-    { id: 3, name: "Jeans", price: 1499, image: "images/jeans.png" },
-    { id: 4, name: "Sneakers", price: 2499, image: "images/sneakers.png" }
-];
-
+let products = []; // 🔥 now comes from backend
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 /* Show SPA Sections */
@@ -16,6 +10,17 @@ function showSection(sectionId) {
     document.getElementById(sectionId).classList.add("active-section");
 }
 
+/* 🔥 Fetch Products from Backend */
+function fetchProducts() {
+    fetch("http://localhost:5000/api/products")
+        .then(res => res.json())
+        .then(data => {
+            products = data; // store backend products
+            displayProducts();
+        })
+        .catch(err => console.log(err));
+}
+
 /* Display Products */
 function displayProducts() {
     const productList = document.getElementById("productList");
@@ -25,11 +30,11 @@ function displayProducts() {
         productList.innerHTML += `
             <div class="col-md-3 mb-4">
                 <div class="card">
-                    <img src="${product.image}" class="card-img-top" height="250">
+                    <img src="http://localhost:5000/uploads/${product.image}" class="card-img-top" height="250">
                     <div class="card-body text-center">
-                        <h5>${product.name}</h5>
+                        <h5>${product.title}</h5>
                         <p class="price">₹${product.price}</p>
-                        <button class="btn btn-dark" onclick="addToCart(${product.id})">
+                        <button class="btn btn-dark" onclick="addToCart('${product._id}')">
                             Add to Cart
                         </button>
                     </div>
@@ -46,8 +51,15 @@ function addToCart(id) {
     if (item) {
         item.quantity += 1;
     } else {
-        const product = products.find(product => product.id === id);
-        cart.push({ ...product, quantity: 1 });
+        const product = products.find(product => product._id === id);
+
+        cart.push({
+            id: product._id,
+            name: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
     }
 
     updateCart();
@@ -75,8 +87,8 @@ function updateCart() {
                         ₹${item.price} × ${item.quantity}
                     </div>
                     <div>
-                        <button class="btn btn-sm btn-success" onclick="changeQty(${item.id}, 1)">+</button>
-                        <button class="btn btn-sm btn-danger" onclick="changeQty(${item.id}, -1)">-</button>
+                        <button class="btn btn-sm btn-success" onclick="changeQty('${item.id}', 1)">+</button>
+                        <button class="btn btn-sm btn-danger" onclick="changeQty('${item.id}', -1)">-</button>
                     </div>
                 </div>
             </div>
@@ -108,6 +120,6 @@ function placeOrder(event) {
     showSection("home");
 }
 
-/* Initialize */
-displayProducts();
+/* 🔥 Initialize */
+fetchProducts();   // instead of displayProducts()
 updateCart();
