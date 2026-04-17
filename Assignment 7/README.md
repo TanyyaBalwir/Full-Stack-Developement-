@@ -29,6 +29,4 @@ This project is a simple full-stack web application made with React.js, Express.
 - See total reviews and average rating
 - Clean and simple student-friendly UI
 
-## Important
 
-If you want, I can help you connect this to your own MongoDB Atlas database. The only thing you may need to do yourself is provide your actual MongoDB connection string in the backend `.env` file.
